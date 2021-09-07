@@ -1,0 +1,15 @@
+h1{
+    color: red;
+}
+
+#titi_1 {
+    font-size: 40px;
+}
+
+.noticias{
+    font-family: Arial;
+}
+
+p, h1 {
+    background-color: lightgray;
+}

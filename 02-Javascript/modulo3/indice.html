@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>IndexedDB-1</title>
+
+  <script>
+    let bd;
+    //open in bd
+      let reqDB = indexedDB.open('meuDB', 1);
+
+    reqDB.onsuccess = () => {
+      bd = reqDB.result;
+    };
+    reqDB.onerror = () => {
+      bd = reqDB.error;
+    };
+//
+
+    reqDB.onupgradeneeded = (e) => {
+      bd = reqDB.result;
+      if (!bd.objectStoreNames.contains('livros')){
+    let livroOS = bd.createObjectStore('livros', { keyPath: 'id'});
+
+    livroOS.createIndex('titutoIDX','titulo', { unique: false});
+      livroOS.createIndex('autorIDX','autor', { unique: false});
+      }
+    };
+//ad value in bd
+    onload = () => {
+      btnC.onclick = () => {
+        let livros = {
+          id: +idLivro.value,
+          titulo: titulo.value,
+          autor: autor.value
+        };
+
+        let transacaoDB = bd.transaction(['livros'], 'readwrite');
+        let livrosOS = transacaoDB.objectStore('livros');
+        let reqOS = livrosOS.add(livros);
+        reqOS.onsuccess = (x) => {
+          console.log("sucesso");
+        };
+        reqOS.onerror = (e) => {
+          console.log(reqOS.error);
+        };
+      };
+
+//get information in bd
+
+      btnG.onclick = () => {
+        let transacaoDB = bd.transaction(['livros'], 'readonly');
+        let livrosOS = transacaoDB.objectStore('livros');
+        let reqOS = livrosOS.get(+idLivro.value);
+        reqOS.onsuccess = (x) => {
+          titulo.value = reqOS.result.titulo;
+          autor.value = reqOS.result.autor;
+          };
+        reqOS.onerror = (e) => {
+          console.log(reqOS.error);
+        };
+      };
+
+//delete in bd
+
+      btnD.onclick = () => {
+        let transacaoDB = bd.transaction(['livros'], 'readwrite');
+        let livrosOS = transacaoDB.objectStore('livros');
+        let reqOS = livrosOS.delete(idLivro.value);
+        reqOS.onsuccess = (x) => {
+            console.log("Excluido Com sucesso");
+          };
+        reqOS.onerror = (e) => {
+          console.log(reqOS.error);
+        };
+      };
+
+  // update information bd
+
+  btnA.onclick = () => {
+    let livros = {
+      id: +idLivro.value,
+      titulo: titulo.value,
+      autor: autor.value
+    };
+    let transacaoDB = bd.transaction(['livros'], 'readwrite');
+    let livrosOS = transacaoDB.objectStore('livros');
+    let reqOS = livrosOS.put(livros);
+    reqOS.onsuccess = (x) => {
+        console.log("Livro atualizado Com sucesso");
+      };
+    reqOS.onerror = (e) => {
+      console.log(reqOS.error);
+    };
+  };
+
+  //Listar
+
+  btnL.onclick = () => {
+
+    let transacaoDB = bd.transaction('livros');
+    let livrosOS = transacaoDB.objectStore('livros');
+    let reqOS = livrosOS.getAll(IDBKeyRange.only("3"));
+    reqOS.onsuccess = (x) => {
+        console.log(x.target.result);
+      };
+    };
+
+    //usando  o openCursor
+    btnLL.onclick = () => {
+
+      let transacaoDB = bd.transaction('livros');
+      let livrosOS = transacaoDB.objectStore('livros');
+      let reqOS = livrosOS.openCursor()
+
+      reqOS.onsuccess = (e) => {
+        let cursor = e.target.result;
+
+        if(cursor){
+          console.log(cursor.value);
+          cursor.continue();
+        }else{
+          console.log("fim");
+        }
+       };
+
+      };
+
+
+
+btnLT.onclick = () => {
+bd
+  .transaction('livros')
+  .objectStore('livros')
+    .index('titutoIDX')
+    .get(titulo.value).onsuccess = (e) =>  {
+      idLivro.value = e.target.result.id;
+    titulo.value = e.target.result.titulo;
+  autor.value = e.target.result.autor;
+};
+};
+
+btnLA.onclick = () => {
+  bd
+     .transaction('livros')
+     .objectStore('livros')
+      .index('autorIDX')
+    .getAll(IDBKeyRange.only(autor.value)).onsuccess = (e) => {
+      console.log(e.target.result);
+   };
+  };
+
+};
+
+  </script>
+</head>
+
+<body>
+  <h1>Javascript-3</h1>
+  <p><label for="idLivro">ID:</label> <input type="number" id="idLivro" /></p>
+  <p><label for="titulo">titulo:</label> <input type="text" id="titulo" /></p>
+  <p><label for="autor">autor:</label> <input type="text" id="autor" /></p>
+
+  <button id="btnC">incluir</button>
+<button id="btnG">Ler</button>
+<button id="btnD">Deletar</button>
+<button id="btnA">Atualizar</button>
+<button id="btnL">Listar</button>
+<button id="btnLL">Listar</button>
+<button id="btnLT">Listar por titulo</button>
+<button id="btnLA">Listar por autor </button>
+
+
+<pid"=output"></p>
+</body>
+
+</html>
