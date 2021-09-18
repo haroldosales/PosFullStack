@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="pt-br" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <style >
+      #desenho{
+        border: thin solid black;
+      }
+    </style>
+
+    <script type="text/javascript">
+      onload = () => {
+            if(desenho.getContext){
+              let ctx = desenho.getContext('2d');
+              ctx.fillRect(50,50,50,50);
+              ctx.clearRect(30,30,20,20);
+              ctx.strokeRect(10,10,30,20);
+
+              ctx.stroker(20,20,20,20);
+            };
+          };
+    </script>
+  </head>
+  <body>
+    <h1>Canvas</h1>
+    <canvas id="desenho" width="500" height="300">
+      seu navegador com suporte
+    </canvas>
+
+  </body>
+</html>

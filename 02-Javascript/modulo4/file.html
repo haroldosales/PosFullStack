@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="pt-br" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Javascritp-File</title>
+    <script type="text/javascript">
+      onload = () => {
+        arquivos.onchange = () => {
+         arq.innerHTML = Array.from(arquivos.files).map((f) => f.name).join('<br>');
+        /*  for(let i=0; i<arquivos.files.length; i++)
+
+          arq.innerHTML += arquivos.files[i].name + "<br />"*/
+      };
+
+  //subistindo a função do click
+        btnArquivos.onclick = () => {
+          arquivos.click();
+        };
+      };
+        </script>
+  </head>
+  <body>
+    <h1>File</h1>
+    <input type="file" id="arquivos" multiple style="display:none">
+    <button type="button" id="btnArquivos">Escolher arquivos</button>
+    <p id="arq"></p>
+  </body>
+</html>
