@@ -5,24 +5,69 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>D3js</title>
+    <style >
+   #grafico  div {
+      background-color: lightblue;
+      padding: 5px;
+      margin-bottom: 5px;
+      text-align: right;
+      }
+
+
+    </style>
     <script src="https://d3js.org/d3.v7.min.js"></script>
-    <script> 
+    <script>
     onload = () => {
-        d3.selectAll('div').style('background-color','blue')
-        .append('p').html('exemplo');
+          /*  d3.selectAll('p')
+            .style('background-color','lightblue')
+            .append('p').html('exemplo');*/
+
+//Conteudo a baixo faz uma amarraçao aos elementos de p, fazendo uma vinculação
+//e podendo adicionar texto em campos html vazios
+        let divs = d3.select('#grafico')
+        .selectAll('div.barra')
+        .data([10, 20, 30, 40, 50])
+
+
+
+    divs.enter()
+       .append('div').text((d) => d)
+       .style('width',(d) => d * 10 +'px');
+
+
+
+
+
+
     };
     </script>
 </head>
-<body>
+<body >
+
+
+  <h1>D3</h1>
+<div id="grafico"></div>
+
+  <!--
+  #o .append ele faz adcionar o texto junto no html, fazendo uma forma diferente
+  do jquery
     <div>
+
+    </div>
  <h1>D3</h1>
 </div>
 <div>
  <p id="destaque">Parágrafo em destaque</p>
-<p>20</p>
-<p>30</p>
-<p>50</p>
-<p>100</p>
 </div>
+<div>
+  <p>Segundo paragrafo</p>
+  <p>Terceiro paragrafo</p>
+</div>
+
+</div>
+-->
+
+
+
 </body>
 </html>
