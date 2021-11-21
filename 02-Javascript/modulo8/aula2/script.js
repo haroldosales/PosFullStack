@@ -1,4 +1,4 @@
-//closure 1
+s//closure 1
 /* function criarContador() {
     let n = 0;
     return function() {
