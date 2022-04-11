@@ -1,10 +1,8 @@
-# Getting Started with Create React App
+# Criando todo-list em  React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Aplicativa de todo-list como exercicios de estudos da pos puc minas
+## Comando para executar ele do proprio react
 
-## Available Scripts
-
-In the project directory, you can run:
 
 ### `npm start`
 

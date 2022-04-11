@@ -25,17 +25,31 @@ export const TodoList = () => {
   const [taskValue, setTaskValue] = useState("");
 
   const handleTaskSubmit = (event) => {
+    if(items.find( i => i.name === taskValue)) {
+      event.preventDefault();
+       return;
+    }
+
       setItems([... items,{ name: taskValue, isCompletd: false}])
       setTaskValue('');
       event.preventDefault();
   }
 
-  const handOnTaskChange =  event => {
-    console.log(event)
-  };
+  const handOnTaskChange =  (event, item) => {
+    setItems(items.map(i => {
+        if(i.name === item.name) {
+            return {
+              ...i,
+              isCompleted: event.target.checkbox
+            }
+        }
+        return i;
+    }))
+  };  
 
   return (
     <div>
+      <p>voce concluir um total de tarefa de {items.filter(i => i.isCompleted).length} tarefa concluida</p>
         <form onSubmit={handleTaskSubmit}>
             <input type="text"  placeholder="Adicone nova tarefa" value={taskValue}
             onChange={(event) => setTaskValue(event.target.value)}
