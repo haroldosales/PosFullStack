@@ -12,13 +12,32 @@ export const TodoList = () => {
 
   const [taskValue, setTaskValue] = useState("");
   const handleTaskSublimit = (event) => {
-    setItems([...items, { name: taskValue, isCompleted: false }]);
+    if (items.find((i) => i.name === taskValue)) {
+      event.preventDefault();
 
+      return;
+    }
+    setItems([...items, { name: taskValue, isCompleted: false }]);
+    setTaskValue("");
     event.preventDefault();
-  }
+  };
+
+  const handleOnTaskChanged = (event, item) => {
+    setItems(items.map(i => {
+      if (i.name  === item.name) {
+        return {
+            ...i,
+            isCompleted: event.target.checked
+        }
+      }
+      return i;
+    }))
+    console.log(event);
+  };
 
   return (
     <div className="Todo-list-Conteneir">
+      <p> Você conclui um total de {items.filter(i => i.isCompleted).length}</p>
       <form onSubmit={handleTaskSublimit}>
         <input
           type="text"
@@ -31,9 +50,9 @@ export const TodoList = () => {
 
       <ul>
         {items.map((item) => (
-          <TodoListItem item={item} />
+          <TodoListItem handleOnTaskChanged={handleOnTaskChanged} item={item} />
         ))}
       </ul>
     </div>
   );
-}
+};

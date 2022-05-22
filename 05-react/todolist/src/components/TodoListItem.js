@@ -1,7 +1,8 @@
 export const TodoListItem = (props) => {
-  return (
+    return (
     <li>
-      <input type="checkbox" />
+      <input type="checkbox" checked={props.item.isCompleted} 
+        onChange={(event) => props.handleOnTaskChanged(event, props.item)} />
       {props.item.name}
     </li>
   );
