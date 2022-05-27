@@ -1,0 +1,1 @@
+export const Home = () =>  <h1>Oi movies list</h1>;
