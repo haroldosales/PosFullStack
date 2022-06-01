@@ -1,1 +1,12 @@
-export const Home = () =>  <h1>Oi movies list</h1>;
+import React from 'react';
+
+export const Home  = ()  =>{
+        return (
+            <div>
+             <h1>Ola</h1>
+
+            </div>
+        );
+
+
+};
