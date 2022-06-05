@@ -12,15 +12,15 @@ export const getStaticPaths = async () => {
 
     const movies = await response.json();
 
-    const paths = movies.results.map(movies => ({
-            params: {id:  `${movie.id}` } 
+    const paths = movies.results.map(movie => ({
+        params: { id: `${movie.id}` }
     }));
 
     return { paths, fallback: true }
 };
 
 export const getStaticProps = async (context) => {
-    const movieId = context.params.id
+    const movieId = context.params.id;
     const response = await fetch('https://api.themoviedb.org/3/movie/${movieId}?api_key=d416af5d4faee64e25ab001d87aab5c3');
 
     const movie = await response.json();
