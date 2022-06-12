@@ -1,12 +1,21 @@
 // criando  api 
-const express = require('express')
-const index = express()
-const port = 3000
+const express = require('express');
+const app = express();
+const port = 3030;
 
-index.get('/', (req, res) => {
-   res.send('Hello World!')
+app.get("/", function (req, res) {
+   res.send("Hello World");
+});
+
+app.get("/pt", function (req, res) {
+   res.send("Ola Mundo");
+});
+
+app.post("/post", function (req, res) {
+   res.send({ sestatus: "ok" });
 })
 
-index.listen(port, () => {
+
+app.listen(port, () => {
    console.log(`Example app listening on port ${port}`)
-})
+});
