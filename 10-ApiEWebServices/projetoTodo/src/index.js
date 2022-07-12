@@ -1,4 +1,8 @@
 const app = require("./app");
+const db = require("./mongosedb");
+
+
+db.init();
 
 const port = process.env.PORT ||  3000;
 
