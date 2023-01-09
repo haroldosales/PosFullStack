@@ -1,0 +1,60 @@
+# Document API 
+## Mundo da web
+   * API -Application Programming interface  ( interface de programação de aplicativo)
+
+## Swagger e Open Api Specification sao forms de defivnir uma api;
+  *  são projetas  para API REST
+  *  Rest é um tipo de  Api da Web
+
+## O que é uma API?
+ela defini como duas pelas de software se comunicam
+    Nao é uma papgian inteira de web - são apenas dados
+
+## Uma definição
+    --> Quais Solicitaçoes estao disponiveis
+    --> qual é a aparencia da resposta para cada solicitação
+
+
+## O que voce pode Fazer com uma definiçao de API
+    
+    ### Requisição e resposta REST
+         Api resquest
+    api --------------> serv
+        <--------------   
+           Api  response
+
+    
+## Arquivo de definiçao de API
+       * arquivo descreve todas as coisas que você podem fazer com uma api
+      * lista todas as requisiões que voce pode fazer
+      * mostrar como fazer uma requisiçao
+      * Diz a voce como sera a resposta
+    
+## Porque que criar uma definiçao 
+    * Permite projetar a API antes de implemtar-la
+    * Ajudar com teste automatizados
+    * Criar codigo automatico em varias lingaagens
+    * Pode Serr usado gerar documentaçao automatico
+    * A documentação pode ser interativa
+
+## Swagger
+  *  Historicamente era uma espicificação como cirar
+  *  Apos uma nova versao 2.0, espercifica se tornou a Open API Specification(OAS);
+  *  Swagger é uma coleçao de ferramente especifação OpenApi
+
+## Open API Initiative
+  * A open API initiative(OAI) é uma o é uma organização criada por um consorcio de especialistas da industria;
+  * Focado na criação , evolução e promoção de um formato descroção neutro do fornecedor;
+  * é responsavel pela espcifiação openAPI , mas nao é responsavel  por quaisquer ferramentas que usam
+
+  ## Ferramenta Swagger
+   ### Swagger oferece varias Ferramentas
+        * editor Swagger: ajudar escrever arquivos OAS;
+        * Swagger CodeGen: Gera código em linguagens popular para usar em API;
+        * Swagger UI: Gera documentação a parti de arquivo OAS;
+        * SwaggerHub: Plataforma hospedada para projetar a documentar API
+
+##  Arquivos de definição de uma API
+###  Corpos de requiçao
+
+    
