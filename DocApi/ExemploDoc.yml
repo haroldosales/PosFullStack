@@ -1,0 +1,34 @@
+# Envery Open API file need this
+swagger: '2.0'
+
+# This is your document metadata
+info:
+  version: "0.0.1"
+  title: Example Photo Service
+
+host: api.example.com
+basePath: /photo
+schemes: 
+  - https
+
+  # adcionar uma requição 
+
+# Endpoints
+paths:
+ # Photo album
+ /album:
+ # Get one or more albums
+ get:
+ # Query parameters
+ parameters:
+ # Starting date
+ - name: start
+   in: query
+   required: false
+   type: string
+
+   #Ending date
+   - name: end
+     int: query
+     required: false
+     type: string 

@@ -109,3 +109,29 @@ ela defini como duas pelas de software se comunicam
 * Cada Operaçao(caminho e metodos)
 * cada parametros
 * cada elementro de resposta
+
+# YAML para especificação OAS/Swagger 
+ * A OAS usa dados estruturados para seus arquivos de definição de API.
+ * Voce pode usar: YAML ou JSON.
+ * Para este curso usaremos YAML
+ 
+ # YAML
+ * YAML Ain´t Markup Language;
+ * Nao é uma linguagem de marcação como HTML.
+* Usado para dados, nao para conteudo.
+* Comparado JSON e XML , minimiza caracteres.
+* è mais frequentemente usado para arquivos de config, em vez de arquivos transmitido pela web, como JSON
+
+## PARE DE CHAVE /VALOR
+ * para de valores-chaves são dinifido por dois pontos ,seguido por um espaço
+ ## EX: 
+ >date: 2017-08-06 firstName: Peter
+
+ ## Niveis
+    * sao indicado por recuo de espaço em branco
+    * Nao pode ser um recuo de tabulação
+> Figura das Diferença 
+    ![alt](imge.png)
+
+
+
