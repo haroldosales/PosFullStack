@@ -54,7 +54,58 @@ ela defini como duas pelas de software se comunicam
         * Swagger UI: Gera documentação a parti de arquivo OAS;
         * SwaggerHub: Plataforma hospedada para projetar a documentar API
 
-##  Arquivos de definição de uma API
-###  Corpos de requiçao
+# Arquivos de definição de uma API
+> Nota: API significar uma coleçao de requições relacionadas  
 
+    * Um arquivo que descreve tudo o que voce pode fazer com uma API
+    * Localização do servidor.
+    * Como a segurança é tratada(autorizaçao mautenticação).
+    * Todos as requisições disponiveis nessa API.
+    * Todos os diferentes dados que voce pode enviar em uma requisição.
+    * Quais dados são retornados.
+    * quais códigos de status HTTP podem ser retornados.
+
+>  Anatomia de uma requisiçao
+    ![alt](image.png)
     
+##  URL da requisição de exemplo: https://api.example.com/v2/user
+ *  Scheme: https
+ *  Host: api.example.com
+ *  base path: /V2
+ *  PATH : /user
+
+ ##  O metodo http descreve que tipo açaõ sera executada
+  * get, post put, delete, etc
+##  Parametros 
+### Ex:  https://api.example.com/v2/user/{user-id}/connectiton?degress=2 * Parametros de caminho (path parameters)
+    > {user-id} 
+* Parametros de consulta (query parameters)
+ > degress   
+
+ ###  Corpos de requiçao
+    * para alguns metodo (POST,PUT, etc), pode especificar um corpo de requisção com dados que vc quer, geralmente é json
+    * o corpo é tratado como um parametro
+    * voce pode montar o corpo 
+
+### body (response body)
+    * Em rest,  o corpo da resposta pode qualquer formato, mas geralmente é json.
+    * o corpo da resposta esta incluido em um objeto de resposta.
+    * O objeto de resposta tem um esquema apra descreve os dados estrtuturados.
+    * voce pode objeto speparado para cada status codigo HTTP retornado
+    
+## Segurança
+ * Segurança significa autenticaçao e autorização
+ * PODER SER:
+ *  NENHUMA
+ * BASIC  AUTHENTICATION
+ * API Key
+ * OAuth
+
+## Documentação
+    * Descrições de elementros para leigos
+     * Para gerar documento automaticamente
+### basicamente é add uma seção de descrition para:
+* A Api
+* Cada Operaçao(caminho e metodos)
+* cada parametros
+* cada elementro de resposta
