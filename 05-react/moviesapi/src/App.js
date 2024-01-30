@@ -1,12 +1,18 @@
 import './App.css';
 import React from 'react'
-import { ApplicationRoutes } from './ApplicationRoutes';
 
 function App() {
   return (
             <>
-                <header></header>
-                <ApplicationRoutes></ApplicationRoutes>
+                <header>Test</header>
+                <nav>
+                  <table>
+                    <tr>
+                      home
+                    </tr>
+                    <td>Sobre</td>
+                  </table>
+                </nav>
             </>
   );
 }
