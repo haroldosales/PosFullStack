@@ -1,0 +1,6 @@
+{
+    "explorer.compactFolders": true,
+    "explorer.fileNesting.enabled": true,
+    "explorer.expandSingleFolderWorkspaces": true,
+    "explorer.openEditors.sortOrder": "fullPath"
+}

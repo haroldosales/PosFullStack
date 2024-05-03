@@ -12,13 +12,15 @@
             "filhos": [
                 { nome: 'ana', idade: 13 },
                 { nome: 'pedro', idade: 10 }
-            ]
+            ], 
+            casado: true,
         };
 
-        let strUsuario = JSON.stringify(usuario);
-        console.log(1, usuario, typeof usuario);
-        console.log(2, strUsuario, typeof strUsuario);
+        localStorage.setItem('usuario',JSON.stringify(usuario)) 
 
+        let strUsuario = localStorage.getItem('usuario');
+        let usuario2 = JSON.parse(strUsuario);
+        console.log(usuario2, typeof usuario2);
     </script>
 
 
