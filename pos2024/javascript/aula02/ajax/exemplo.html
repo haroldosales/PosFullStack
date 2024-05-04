@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ajax</title>
+
+    <script>
+        function ajax() {
+            try {
+                let xthttp = new XMLHttpRequest();
+                xthttp.onreadystatechange = function () {
+                    if (xthttp.readyState == 4) {
+                        if (xthttp.status == 200) {
+                            let use = JSON.parse(xthttp.responseText);
+                            console.log('usuario');
+                        } else {
+                            console.warn('status' + xthttp.status);
+                        }
+                    }
+
+                };
+                xthttp.open('GET', 'daados.json', true);
+                xthttp.send();
+            } catch (e) {
+                alert('Error na comunicacao')
+
+            }
+        }
+        ajax();
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>
