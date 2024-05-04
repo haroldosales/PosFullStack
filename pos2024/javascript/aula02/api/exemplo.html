@@ -14,26 +14,25 @@
                     if (xthttp.readyState == 4) {
                         if (xthttp.status == 200) {
                             let use = JSON.parse(xthttp.responseText);
-                            console.log('usuario');
+                            console.log(use);
                         } else {
-                            console.warn('status' + xthttp.status);
+                            console.log('status' + xthttp.status);
                         }
                     }
 
                 };
-                xthttp.open('GET', 'daados.json', true);
+                xthttp.open('GET','https://reqres.in/api/users', true);
                 xthttp.send();
             } catch (e) {
                 alert('Error na comunicacao')
 
             }
         }
-        ajax();
     </script>
 </head>
 
 <body>
-
+        <button onclick="ajax()">Carregar</button>
 </body>
 
 </html>

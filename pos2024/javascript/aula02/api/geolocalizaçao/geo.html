@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Javascript</title>
+    <script>
+        onload = () =>{
+            let geo = navigator.geolocation;
+            const geoCon = function(p){
+                let lat = p.coords.latitude;
+                let lng = p.coords.longitude;
+
+                output.innerHTML = `Conde ${lat} e ${lng}`;
+            };
+            const geoError = function (e){
+                console.log(e);
+            };
+            let watchID = geo.watchPosition(geoCon,geoError);
+            stWatch.onClick = () => {
+                console.log(watchID);
+                geo.clearWatch(watchID)
+            }
+        }
+    </script>
+</head>
+<body>
+    <p id="output"></p>
+    <button id="stWatch"></button>
+</body>
+</html>

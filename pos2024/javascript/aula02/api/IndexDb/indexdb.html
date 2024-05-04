@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript</title>
+    <script>
+         let livros = [
+                {id:1, titulo: 'iliada',autor:'Homem'},
+                {id:2, titulo: 'isa', autor:'mulher'}
+         ];
+        let db;
+        let reqDb = indexedDB.open('meuDB', 1);
+        reqDb.onsuccess = () => {
+            db = reqDb.result;
+        }
+
+        reqDb.onerror = () => {
+            console.log(reqDb.error)
+        }
+
+        reqDb.onupgradeneeded = (e) => {
+            db = reqDb.result;
+            if(!db.objectStoreNames.contains('livros'))
+            db.createObjectStore('livros',{keyPath:'id'})
+            };
+
+        onload = () => {
+            btnDb.onclick = () => {
+                    let livros = {
+                        id: idLivro.value,
+                        titulo: titulo.value,
+                        autor: autor.value
+                    }
+                     let trans = db.transaction(['livros'],'readwrite');
+                     let liv = trans.objectStore('livros');
+                     let reqOS = liv.add(livros);
+                     reqOS.onsuccess= (e) =>{
+                        console.log(reqOS.result);
+                     };
+                     reqOS.onerror = (e) =>{
+                        console.log(e.result);
+                     };
+                     console.log(livros);
+
+                }
+        }
+    </script>
+</head>
+
+<body>
+        <h1>Script IndexDb</h1>
+ 
+        <label for="idLivro">Id</label> <input type="number" id="idLivro">
+        <label for="titulo">Id</label> <input type="text" id="titulo">
+        <label for="autor">Id</label> <input type="text" id="autor">
+
+        <button id="btnDb">alterar</button>
+
+    </body>
+
+</html>
