@@ -45,6 +45,22 @@
                      console.log(livros);
 
                 }
+                    pegar.onclick = () => {
+                   
+                     let liv = trans.objectStore('livros');
+                     let reqOS = liv.get(livros);
+                     reqOS.onsuccess= (e) =>{
+                        console.log(reqOS.result);
+                        reqOS.id.value = reqOS.result.id;
+                        reqOS.titulo.value = reqOS.result.titulo;
+                        reqOS.autor.value = reqOS.result.autor; 
+                     };
+                     reqOS.onerror = (e) =>{
+                        console.log(e.result);
+                     };
+                     console.log(livros);
+
+                }
         }
     </script>
 </head>
@@ -57,6 +73,8 @@
         <label for="autor">Id</label> <input type="text" id="autor">
 
         <button id="btnDb">alterar</button>
+        <button id="pegar">Ler</button>
+
 
     </body>
 
