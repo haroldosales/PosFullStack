@@ -1,1 +1,4 @@
-document.querySelector('#resultado').innerHTML = 'Script Executado'
+
+onload =  () => {
+	document.querySelector('#resultado').innerHTML = 'Script Executado';
+}
