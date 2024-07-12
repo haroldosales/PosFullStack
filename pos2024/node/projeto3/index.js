@@ -26,10 +26,15 @@ app.use(express.json())
 
 app.use('/static',express.static('public'))
 
-app.post('/users', (req, res ) => {
+app.post('/users/:nome', (req, res ) => {
   const name = req.body
   console.log(name)
   res.send('informacao veio' + name.nome)
+})
+
+app.get('/users/:nome', (req, res ) => {
+
+  res.send('informacao veio' + req.params.nome)
 })
 
 app.listen(3000, () => {
