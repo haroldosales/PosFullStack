@@ -1,36 +1,32 @@
 var express = require("express");
-var apiRouterV1 = express.Router();
+var apiRouterV2  = express.Router();
+const knex = require("knex")(require('../knexfile').development);
 
-var produtos = [
-  { id: 1, descricao: "blusa", marca: "Nike", preco: 49.0 },
-  { id: 2, descricao: "calça", marca: "leis ", preco: 89.0 },
-  { id: 3, descricao: "short", marca: "Nike", preco: 99.0 },
-  { id: 4, descricao: "tenis", marca: "Nike", preco: 490.0 },
-  { id: 5, descricao: "meia", marca: "Nike desh", preco: 40.0 },
-  { id: 6, descricao: "regada V", marca: "Nike sa", preco: 49.0 },
-  { id: 7, descricao: "calçca jeans", marca: "Nike", preco: 99.0 },
-  { id: 8, descricao: "pijma", marca: "tes", preco: 29.0 },
-  { id: 9, descricao: "cueca", marca: "Hgm", preco: 59.0 },
-  { id: 10, descricao: "Camisa", marca: "Ral", preco: 29.0 },
-];
+const produtos = () => knex('produtos');
 
-apiRouterV1.get("/produtos", function (req, res, next) {
-  res.json(produtos);
+apiRouterV2 .get("/produtos", function (req, res, next) {
+  knex('produtos').select('*').then(produtos => {
+    res.status(200).json(produtos)
+  }).catch(err => res.status(500).json({message:`erro ao obter produtos: ${err.messege}`}))
 });
 
-apiRouterV1.get("/produtos/:id", function (req, res, next) {
+apiRouterV2 .get("/produtos/:id", function (req, res, next) {
+
   let id = req.params.id;
-  if (id) {
-    let idInt = Number.parseInt(id);
-    let idx = produtos.findIndex((o) => o.id === idInt);
-    if (idx > -1) {
-      res.status(200).json(produtos[idx]);
-    } 
-    res.status(404).json({ message: `Produto nao encontrado` });
-  }
-});
+  if(id){
+    knex('produtos').select('id').where('id',id).then(produtos => {
+      if(produtos == null) {
+      res.status(200).json(produtos);
+    }
+    res.status(404).json({ message: `Id do produto nao encontrado` });
+    }).catch(err => res.status(500).json({message:`erro ao obter produtos: ${err.messege}`}))
 
-apiRouterV1.post("/produtos", function (req, res, next) {
+  }
+   
+   
+}); 
+
+apiRouterV2 .post("/produtos", function (req, res, next) {
   let produto = req.body;
   let newId = Math.max(...produtos.map((o) => o.id)) + 1;
 
@@ -42,7 +38,7 @@ apiRouterV1.post("/produtos", function (req, res, next) {
     .json({ message: `Produto colocado com sucesso`, data: { id: newId } });
 });
 
-apiRouterV1.delete("/produtos/:id", function (req, res, next) {
+apiRouterV2 .delete("/produtos/:id", function (req, res, next) {
   let id = req.params.id;
   if (id) {
     let idInt = Number.parseInt(id);
@@ -58,7 +54,7 @@ apiRouterV1.delete("/produtos/:id", function (req, res, next) {
   }
 });
 
-apiRouterV1.put("/produtos/:id", function (req, res, next) {
+apiRouterV2 .put("/produtos/:id", function (req, res, next) {
   let id = req.params.id;
    produto = req.body
   if (id) {
@@ -78,4 +74,4 @@ apiRouterV1.put("/produtos/:id", function (req, res, next) {
     res.status(4004).json({ message: `Produto nao encontrado` });
   }
 });
-module.exports = apiRouterV1;
+module.exports = apiRouterV2  ;
