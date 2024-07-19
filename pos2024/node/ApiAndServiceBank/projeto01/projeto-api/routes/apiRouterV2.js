@@ -10,68 +10,85 @@ apiRouterV2 .get("/produtos", function (req, res, next) {
   }).catch(err => res.status(500).json({message:`erro ao obter produtos: ${err.messege}`}))
 });
 
-apiRouterV2 .get("/produtos/:id", function (req, res, next) {
-
-  let id = req.params.id;
-  if(id){
-    knex('produtos').select('id').where('id',id).then(produtos => {
-      if(produtos == null) {
-      res.status(200).json(produtos);
+apiRouterV2.get("/produtos/:id", function (req, res, next) {
+       
+   let id = req.params.id;
+   if(id) {
+    idInt = Number.parseInt(id);
+    knex('produtos').select('*').where({id: idInt}).then(produtos => {
+    if(!produtos.length) {
+      res.status(404).json({message: 'produto nao enccontrado'})
+      return 
     }
-    res.status(404).json({ message: `Id do produto nao encontrado` });
-    }).catch(err => res.status(500).json({message:`erro ao obter produtos: ${err.messege}`}))
+      let produto = produtos[0]
+      res.status(200).json(produto);
+    }).catch(err => res.status(500).json({message:`erro ao obter produtos: ${err.messege}`}));
 
-  }
-   
+   }
+   else{
+    res.status(404).json({message: 'produto nao enccontrado'})
+
+   }
+  // fiz sozinho
+  // let id = req.params.id;
+  // if(id){
+  //   knex('produtos').select('id').where('id',id).then(produtos => {
+  //     if(produtos != id) {
+  //     res.status(200).json(produtos);
+  //   } else {
+  //   res.status(404).json({ message: `Produto nao encontrado` });
+  // }
+  //   }).catch(err => res.status(500).json({message:`erro ao obter produtos: ${err.messege}`}))
+
+    
+  // }
    
 }); 
 
-apiRouterV2 .post("/produtos", function (req, res, next) {
+apiRouterV2.post("/produtos", function (req, res, next) {
   let produto = req.body;
-  let newId = Math.max(...produtos.map((o) => o.id)) + 1;
+   knex('produtos').insert(produto, ['id']).then(produtos =>{
+    if(!produtos.length){
+      res.status(400).json({message: 'produto nao inserido '})
 
-  produto.id = newId;
-  produtos.push(produto);
+    }else {
+      let id = produtos[0];
+      res.status(201).json({message: 'produto criado com sucesso', data:{id}});
+    }
+   }).catch(err => res.status(500).json({message:`erro ao obter produtos: ${err.messege}`}))
 
-  res
-    .status(201)
-    .json({ message: `Produto colocado com sucesso`, data: { id: newId } });
+
+
+
 });
 
 apiRouterV2 .delete("/produtos/:id", function (req, res, next) {
   let id = req.params.id;
-  if (id) {
-    let idInt = Number.parseInt(id);
-    let idx = produtos.findIndex((o) => o.id === idInt);
-    if (idx > -1) {
-   produtos.splice(idx, 1)
-   res.status(200).json(  {message: ` excluido com sucesso`})
-    } else {
-      res.status(4004).json({ message: `Produto nao encontrado` });
-    }
-  } else {
-    res.status(4004).json({ message: `Produto nao encontrado` });
+  if(id) {
+    idInt = Number.parseInt(id);
+    knex('produtos').where({id: idInt}).del().then(result => {
+      res.status(200).json({message: 'foi com Deus'})
+   }).catch(err => res.status(500).json({message: "erro ao excluir" + err.messege }));
   }
 });
 
 apiRouterV2 .put("/produtos/:id", function (req, res, next) {
   let id = req.params.id;
-   produto = req.body
+  let  produto = req.body;
   if (id) {
     let idInt = Number.parseInt(id);
-    let idx = produtos.findIndex((o) => o.id === idInt);
-    if (idx > -1) {
-   produtos[idx].descricao = produto.descricao
-   produtos[idx].marca = produto.marca
-   produtos[idx].preco = produtos.preco
 
-   res.status(200).json({message: ` produto alterado com sucesso`,
-                           data: { produto: produtos[idx]}})
-    } else {
-      res.status(4004).json({ message: `Produto nao encontrado` });
-    }
+    knex('produtos')
+          .where({id: idInt})
+          .update(produto)
+          .then(result => {
+                    res.status(200).json({message: ` produto alterado com sucesso`,
+                                          data: {  produto }})
+      }).catch(err => res.status(500).json({message: "erro ao atualizar produto" + err.messege }));
+ 
   } else {
     res.status(4004).json({ message: `Produto nao encontrado` });
   }
+
 });
 module.exports = apiRouterV2  ;
