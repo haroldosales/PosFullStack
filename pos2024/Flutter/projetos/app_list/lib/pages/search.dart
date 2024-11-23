@@ -29,16 +29,6 @@ class _SearchPageState extends State<SearchPage> {
             });
           },
         ),
-        TextField(
-            decoration: const InputDecoration(
-                labelText: "Adicionar",
-                border: OutlineInputBorder(),
-                icon: Icon(Icons.add)),
-                onChanged: (value) => value =>{
-                  setState(() {
-                    onch
-                  })
-                },),
         Expanded(
             child: ListView.builder(
           itemCount: filteredResult?.length ?? 0,
@@ -49,3 +39,4 @@ class _SearchPageState extends State<SearchPage> {
     );
   }
 }
+ 

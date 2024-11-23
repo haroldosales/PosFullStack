@@ -1,6 +1,5 @@
-import 'package:app_list/search.dart';
+import 'package:app_list/pages/search.dart';
 import 'package:flutter/material.dart';
-import 'search.dart';
 
 void main() {
   runApp(const MainApp());
@@ -13,8 +12,21 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-          appBar: AppBar(title: const Text("App with dart")),
+          appBar: AppBar(title: const Text("App with dart search")),
           bottomNavigationBar: BottomNavigationBar(
+            // onTap: (index) {
+            //   switch (index) {
+            //     case 0:
+            //       _router.pushNamed('home');
+            //       break;
+            //     case 1:
+            //       _router.pushNamed('search');
+            //       break;
+            //     case 2:
+            //       _router.pushNamed('profile');
+            //       break;
+            //   }
+            // },
             items: const [
               BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
               BottomNavigationBarItem(
