@@ -23,19 +23,6 @@ class MainApp extends StatelessWidget {
             style: TextStyle(fontSize: 48, fontStyle: FontStyle.italic),
           )),
           bottomNavigationBar: BottomNavigationBar(
-            // onTap: (index) {
-            //   switch (index) {
-            //     case 0:
-            //       _router.pushNamed('home');
-            //       break;
-            //     case 1:
-            //       _router.pushNamed('search');
-            //       break;
-            //     case 2:
-            //       _router.pushNamed('profile');
-            //       break;
-            //   }
-            // },
             items: const [
               BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
               BottomNavigationBarItem(
