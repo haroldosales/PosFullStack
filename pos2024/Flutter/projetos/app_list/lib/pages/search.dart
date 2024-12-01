@@ -46,9 +46,9 @@ class _SearchPageState extends State<SearchPage> {
                       Text(snapshot.data?.elementAt(index).title ?? ''),
                 ));
               } else if (snapshot.hasError) {
-                return Text("Nao foi possivel carregar os dados");
+                return const Text("Nao foi possivel carregar os dados");
               }
-              return CircularProgressIndicator();
+              return const CircularProgressIndicator();
             })
       ],
     );
