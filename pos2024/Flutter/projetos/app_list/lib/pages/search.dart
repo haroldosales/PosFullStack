@@ -1,6 +1,6 @@
+import 'package:app_list/domain/todo_service.dart';
+import 'package:app_list/model/todo.dart';
 import 'package:flutter/material.dart';
-
-const possibleResult = ['puc', 'test', 'flutter', 'studos'];
 
 class SearchPage extends StatefulWidget {
   const SearchPage({super.key});
@@ -10,7 +10,15 @@ class SearchPage extends StatefulWidget {
 }
 
 class _SearchPageState extends State<SearchPage> {
-  List<String>? filteredResult = possibleResult;
+  late Future<List<TodoItem>> filteredResult;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+
+    filteredResult = fetchItems();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -23,20 +31,26 @@ class _SearchPageState extends State<SearchPage> {
               icon: Icon(Icons.search)),
           onChanged: (value) {
             setState(() {
-              filteredResult = possibleResult
-                  .where((option) => option.contains(value))
-                  .toList();
+              filteredResult = searchItems(value);
             });
           },
         ),
-        Expanded(
-            child: ListView.builder(
-          itemCount: filteredResult?.length ?? 0,
-          itemBuilder: (context, index) =>
-              Text(filteredResult?.elementAt(index) ?? ''),
-        ))
+        FutureBuilder(
+            future: filteredResult,
+            builder: (ontext, snapshot) {
+              if (snapshot.hasData) {
+                return Expanded(
+                    child: ListView.builder(
+                  itemCount: snapshot.data?.length ?? 0,
+                  itemBuilder: (context, index) =>
+                      Text(snapshot.data?.elementAt(index).title ?? ''),
+                ));
+              } else if (snapshot.hasError) {
+                return Text("Nao foi possivel carregar os dados");
+              }
+              return CircularProgressIndicator();
+            })
       ],
     );
   }
 }
- 
